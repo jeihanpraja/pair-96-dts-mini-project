@@ -1,27 +1,35 @@
 import React, { useEffect, useState } from "react";
+import tmdb from "../apis/tmdb";
 import { Typography, Box } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { async } from "@firebase/util";
+import CardDetailMovie from "../components/CardDetailMovie";
+import NavBar from "../components/NavBar";
 
-const FilmDetail = ({ movies }) => {
+const FilmDetail = () => {
+  const [movies, setMovies] = useState([]);
+  const [selectedMovie, setSelectedMovie] = useState([]);
   let params = useParams();
-  // const [selectedMovie, setSelectedMovie] = useState();
+  let parMovieId = parseInt(params.movieId);
 
-  // const response = async (movieTitle) => {
-  //   return await movies.filter((movie) => {
-  //     return movie.id === movieTitle;
-  //   });
-  // };
-
-  // const response = movies.then((element) => {
-  //   return element.filter((movie) => params.movieId === movie.id);
-  // });
+  useEffect(() => {
+    const fetchDataMovies = async () => {
+      try {
+        const responseFromTMDB = await tmdb.get("/movie/popular");
+        setMovies(responseFromTMDB.data.results);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchDataMovies();
+  }, []);
 
   return (
     <Box>
       {/* <Typography variant="h5">Movie Detail Page</Typography> */}
-      <Typography>{`Movie Id : ${params.movieId}`}</Typography>
-      {/* <Typography>{response("Lightyear")}</Typography> */}
+      <NavBar />
+      <Typography>{`Movie Id from params : ${parMovieId}`}</Typography>
+      {/* <CardDetailMovie selectedMovie={movies?.find((movie) => movie.id === params.movieId)} /> */}
+      {/* <CardDetailMovie selectedMovie={movies[2]} /> */}
     </Box>
   );
 };

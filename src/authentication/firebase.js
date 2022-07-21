@@ -41,6 +41,7 @@ const loginWithEmailAndPassword = async (email, password) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     console.log("username logged in: ", userCredential.user);
   } catch (err) {
+    alert("user tidak ditemukan");
     console.log(err);
 
     console.log("error code auth", err.code);

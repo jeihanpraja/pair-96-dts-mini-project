@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import tmdb from "../apis/tmdb";
 
 import NavBar from "../components/NavBar";
 import ListMovies from "./ListMovies";
-import FilmDetail from "./FilmDetail";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
-  const params = useParams();
 
   useEffect(() => {
     const fetchDataMovies = async () => {
@@ -20,13 +17,13 @@ const Home = () => {
       }
     };
     fetchDataMovies();
-  }, [params]);
+  }, []);
 
   return (
     <>
       <NavBar />
       <ListMovies movies={movies} />
-      {/* <FilmDetail movies={movies} /> */}
+      {/* {position === "home" ?  : <FilmDetail movies={movies} />} */}
     </>
   );
 };

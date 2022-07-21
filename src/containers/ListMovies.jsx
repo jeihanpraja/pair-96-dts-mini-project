@@ -8,6 +8,7 @@ const ListMovies = ({ movies }) => {
       <Typography variant="h5" component={"div"}>
         Popular Movies from TMDB API
       </Typography>
+      <Typography></Typography>
       <Box
         className="boxy"
         sx={{

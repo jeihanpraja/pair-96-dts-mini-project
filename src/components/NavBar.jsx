@@ -21,7 +21,7 @@ const NavBar = () => {
 
   const buttonLogOutHandler = () => {
     getOutFromApp();
-    navigate("login");
+    navigate("/login/");
   };
 
   return (
